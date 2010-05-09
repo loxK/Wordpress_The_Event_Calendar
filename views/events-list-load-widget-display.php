@@ -14,8 +14,8 @@ $EventProvince	= get_post_meta( $post->ID, '_EventProvince', true );
 
 <li class="<?php echo $alt_text ?>">
 	<div class="when">
-		<span class="month"><?php echo date('M', $start_time); ?></span>
-		<span class="date"><?php echo date('j', $start_time); ?></span>
+		<span class="month"><?php echo date_i18n('M', $start_time); ?></span>
+		<span class="date"><?php echo date_i18n('j', $start_time); ?></span>
 	</div>
 	<div class="event"><?php echo $post->post_title ?></div>
 	<div class="loc"><?php
