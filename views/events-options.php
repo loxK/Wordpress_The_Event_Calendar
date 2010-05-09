@@ -135,6 +135,52 @@ try {
 	?>
 	<h3><?php _e('Settings', $this->pluginDomain); ?></h3>
 	<table class="form-table">
+	    <tr>
+			<th scope="row"><?php _e('Blog category for the events',$this->pluginDomain); ?></th>
+	        <td>
+	            <fieldset>
+	                <legend class="screen-reader-text">
+	                    <span><?php _e('Blog category for the events',$this->pluginDomain); ?></span>
+	                </legend>
+	                <label title='Category'>
+			        <?php
+			        
+			        	$viewOptionValue = eventsGetOptionValue('category_id','0');
+			        	
+			          	$dropdown_options = array('show_option_none' => __('Select'), 'hide_empty' => 0, 'hierarchical' => 1,
+												  'show_count' => 0, 'orderby' => 'name', 'selected' => (int)$viewOptionValue, 
+												  'name'=>'category_id');
+						wp_dropdown_categories($dropdown_options);
+			         ?>
+	                </label><br />
+	            </fieldset>
+	        </td>
+		</tr>
+		
+		<tr valign="top">
+			<th scope="row"><?php _e('Page place-holder',$this->pluginDomain); ?></th>
+				<td>
+					<fieldset>
+						<legend class="screen-reader-text">
+	                    	<span><?php _e('Page place-holder',$this->pluginDomain); ?></span>
+	            		</legend>
+	            		<label title='Page'>
+				        <?php
+				        
+				        	$viewOptionValue = eventsGetOptionValue('page_id','0');
+				        	
+				          	$dropdown_options = array('show_option_none' => __('Select'), 'hide_empty' => 0, 'hierarchical' => 1,
+													  'show_count' => 0, 'orderby' => 'name', 'selected' => (int)$viewOptionValue, 
+													  'name'=>'page_id');
+							wp_dropdown_pages($dropdown_options);
+				        ?>
+	                	</label>
+	                	<br /><span class="setting-description"><?php _e('Select a page to hold the calendar. (optional)', $this->pluginDomain); ?></span>
+	                	
+					</fieldset>
+			</td>
+		</tr>
+	
 		<tr>
 			<th scope="row"><?php _e('Default View for the Events',$this->pluginDomain); ?></th>
 	        <td>

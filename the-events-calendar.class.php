@@ -351,6 +351,8 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 		public function checkForOptionsChanges() {
 			if (isset($_POST['saveEventsCalendarOptions']) && check_admin_referer('saveEventsCalendarOptions')) {
                 $options = $this->getOptions();
+                $options['category_id'] = (int) $_POST['category_id'];
+				$options['page_id'] 	= (int) $_POST['page_id'];
 				$options['viewOption'] = $_POST['viewOption'];
 				if($_POST['defaultCountry']) {
 					$this->constructCountries();
