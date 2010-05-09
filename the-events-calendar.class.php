@@ -746,7 +746,7 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 	    	
 	    	$categoryId = (int)eventsGetOptionValue('category_id', null);
 
-	    	if( (int)$categoryId && $categoryId>0 ) return $categoryId;
+	    	if( $categoryId && $categoryId>0 ) return $categoryId;
 			return false;
 				
 	    }
@@ -782,6 +782,36 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 			return false;
 				
 	    }
+	    
+	    /**
+	     * Gets the Page Id to use for an Event
+	     * @return int|false Page to use or false if none is set
+	     */
+	    static function eventPageId() {
+	    	
+	        $pageId = (int)eventsGetOptionValue('page_id', null);
+
+	    	if( $pageId && $pageId>0 ) return $pageId;
+			return false;
+				
+	    }
+	    
+	    /**
+	     * Gets the Page Name to use for an Event
+	     * @return string|false Page to use or false if none is set
+	     */
+	    static function eventPageName( $pageId = null ) {
+	    	$pageId = $pageId ? $pageId : self::eventPageId();
+	        if( $pageId ) {
+	    		
+	    		return get_post($pageId)->post_name;
+	    		
+	    	}
+			
+			return false;
+				
+	    }
+	    
 		/**
 		 * Flush rewrite rules to support custom links
 		 *
@@ -820,7 +850,7 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 				return;
 			}
 			
-			// as this filter runs befor options are saved we need to get the new category_id if any
+			// as this filter seems to run before options are saved we need to get the new category_id if any
 			if (isset($_POST['saveEventsCalendarOptions']) && check_admin_referer('saveEventsCalendarOptions')) {
 			    $categoryId = (int)$_POST['category_id'];
 			} else  $categoryId = $this->eventCategoryId();
@@ -828,14 +858,33 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 			// if the events category isn't set, we do not neeed to add rewrite rules
 			if( !$categoryId || $categoryId === -1) return;			
 			
-			$eventCategory = get_category( $categoryId );
-			$eventCats = array( $eventCategory );
-			$childCats = get_categories("hide_empty=0&child_of=$categoryId");
-			$eventCats = array_merge( $eventCats, $childCats );
 			$newRules = array();
+			
+			// page rewrite
+			if (isset($_POST['saveEventsCalendarOptions']) && check_admin_referer('saveEventsCalendarOptions')) {
+			    $pageId = (int)$_POST['page_id'] > 0 ? (int)$_POST['page_id'] : false;
+			} else  $pageId = $this->eventPageId();
+			
+			$eventCategory = get_category( $categoryId );
+			
+			$eventCats = array( $eventCategory );
+			
+			$childCats = get_categories("hide_empty=0&child_of=$categoryId");
+			
+			$eventCats = array_merge( $eventCats, $childCats );
+			
+			$baseCategoryUrl = $this->get_category_link( $categoryId );
+			
 			foreach( $eventCats as $cat ) {
-				$url = get_category_link( $cat->cat_ID );
-				$base = str_replace( trailingslashit( get_option( 'siteurl' ) ), '', $url );
+			    
+			    $url = get_category_link( $cat->cat_ID );
+			    $base = str_replace( trailingslashit( get_option( 'siteurl' ) ), '', $url );
+			    
+			    if($pageId) {
+				    $base = str_replace( trailingslashit( $baseCategoryUrl ), '', $url );
+			        $base = $this->eventPageName( $pageId ).'/'.$base;
+				}
+				
 				$newRules[$base . 'month'] 					= 'index.php?cat=' . $cat->cat_ID . '&eventDisplay=month';
 				$newRules[$base . 'upcoming/page/(\d+)']	= 'index.php?cat=' . $cat->cat_ID . '&eventDisplay=upcoming&paged=' . $wp_rewrite->preg_index(1);
 				$newRules[$base . 'upcoming']				= 'index.php?cat=' . $cat->cat_ID . '&eventDisplay=upcoming';
@@ -844,9 +893,10 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 				$newRules[$base . '(\d{4}-\d{2})$']			= 'index.php?cat=' . $cat->cat_ID . '&eventDisplay=month' .'&eventDate=' . $wp_rewrite->preg_index(1);
 				$newRules[$base . '?$']						= 'index.php?cat=' . $cat->cat_ID . '&eventDisplay=' . eventsGetOptionValue('viewOption','month');
 			}
-		    $wp_rewrite->rules = $newRules + $wp_rewrite->rules;
+			
+			$wp_rewrite->rules = $newRules + $wp_rewrite->rules;
+			
 		}
-		
 		/**
 		 * This plugin does not have any deactivation functionality. Any events, categories, options and metadata are
 		 * left behind.
