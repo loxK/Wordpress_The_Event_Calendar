@@ -337,7 +337,7 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 			    add_filter( 'post_limits',		array( $this, 'events_search_limits' ) );
 			    add_action( 'template_redirect',		array($this, 'templateChooser' ) );
 			    add_action( 'pre_get_posts',		array( $this, 'events_cat_excluder' ) );
-			    add_filter( 'wp_list_categories',		array( $this, 'events_catlist_excluder' ) );
+			    //add_filter( 'wp_list_categories',		array( $this, 'events_catlist_excluder' ) );
 			}
 			add_action( 'sp_events_post_errors', array( 'TEC_Post_Exception', 'displayMessage' ) );
 			add_action( 'sp_events_options_top', array( 'TEC_WP_Options_Exception', 'displayMessage') );
@@ -669,6 +669,7 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 		    if( eventsGetOptionValue('hide_category','no')!=='no' && $categoryId=$this->eventCategoryId() ) {
 		        // needs a way to exclude category from categorie lists like wp_categories_list()    
 		    }
+		    return $html;
 		}
 
 		
