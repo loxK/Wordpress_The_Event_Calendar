@@ -111,4 +111,5 @@
 
 
 <?php
+if( eventsGetOptionValue('layout','widecolumn') === 'narrowcolumn' )  get_sidebar();
 get_footer();
