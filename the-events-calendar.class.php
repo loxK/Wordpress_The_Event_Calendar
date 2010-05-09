@@ -888,14 +888,18 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 			
 			$baseCategoryUrl = get_category_link( $categoryId );
 			
+			if($pageId) $purl = get_permalink($pageId);
+			
 			foreach( $eventCats as $cat ) {
 			    
 			    $url = get_category_link( $cat->cat_ID );
 			    $base = str_replace( trailingslashit( get_option( 'siteurl' ) ), '', $url );
 			    
 			    if($pageId) {
-				    $base = str_replace( trailingslashit( $baseCategoryUrl ), '', $url );
-			        $base = $this->eventPageName( $pageId ).'/'.$base;
+			    
+			        $base = str_replace( trailingslashit( $baseCategoryUrl ), '', $url );
+			        $pbase = str_replace( trailingslashit( get_option( 'siteurl' ) ), '', $purl );
+			        $base = $pbase.$base;
 				}
 				
 				$newRules[$base . 'month'] 					= 'index.php?cat=' . $cat->cat_ID . '&eventDisplay=month';
@@ -906,7 +910,7 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 				$newRules[$base . '(\d{4}-\d{2})$']			= 'index.php?cat=' . $cat->cat_ID . '&eventDisplay=month' .'&eventDate=' . $wp_rewrite->preg_index(1);
 				$newRules[$base . '?$']						= 'index.php?cat=' . $cat->cat_ID . '&eventDisplay=' . eventsGetOptionValue('viewOption','month');
 			}
-			
+			var_dump( $newRules);
 			$wp_rewrite->rules = $newRules + $wp_rewrite->rules;
 			
 		}
