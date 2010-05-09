@@ -145,6 +145,33 @@ try {
 	        </td>
 		</tr>
 		
+		   <tr>
+			<th scope="row"><?php _e('Hide events category',$this->pluginDomain); ?></th>
+	        <td>
+	            <fieldset>
+	                <legend class="screen-reader-text">
+	                    <span><?php _e('Hide events category',$this->pluginDomain); ?></span>
+	                </legend>
+	                <label title='Yes'>
+	                    <?php 
+	                     $hideCategoryValue = eventsGetOptionValue('hide_category','no'); 
+	                    if( $hideCategoryValue == 'no' ) {
+	                        $noHideCategory = 'checked="checked"';
+	                    } else {
+	                        $yesHideCategory = 'checked="checked"';
+	                    }
+	                    ?>
+	                    <input type="radio" name="hide_category" value="yes" <?php echo $yesHideCategory; ?> /> 
+	                    <?php _e('Yes',$this->pluginDomain); ?>
+	                </label><br />
+	                <label title='Yes'>
+	                    <input type="radio" name="hide_category" value="no" <?php echo $noHideCategory; ?> /> 
+	                    <?php _e('No',$this->pluginDomain); ?>
+	                </label><br />
+	            </fieldset>
+	        </td>
+		</tr>
+		
 		<tr valign="top">
 			<th scope="row"><?php _e('Page place-holder',$this->pluginDomain); ?></th>
 				<td>
