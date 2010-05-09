@@ -252,7 +252,7 @@ if( class_exists( 'The_Events_Calendar' ) && !function_exists( 'eventsGetOptionV
 			$format = $spEvents->getTimeFormat( $format );
 		}
 		$shortMonthNames = ( strstr( $format, 'M' ) ) ? true : false;
-		$date = date ( $format, strtotime( get_post_meta( $postId, '_EventStartDate', true ) ) );
+		$date = date_i18n( $format, strtotime( get_post_meta( $postId, '_EventStartDate', true ) ) );
 		return str_replace( array_keys($spEvents->monthNames( $shortMonthNames )), $spEvents->monthNames( $shortMonthNames ), $date);
 	}
 	/**
@@ -276,7 +276,7 @@ if( class_exists( 'The_Events_Calendar' ) && !function_exists( 'eventsGetOptionV
 		if ( $showtime ) {
 			$format = $spEvents->getTimeFormat( $format );
 		}
-		$date = date ( $format, strtotime( get_post_meta( $postId, '_EventEndDate', true ) ) );
+		$date = date_i18n( $format, strtotime( get_post_meta( $postId, '_EventEndDate', true ) ) );
 		return str_replace( array_keys($spEvents->monthNames()), $spEvents->monthNames(), $date);
 	}
 	/**
