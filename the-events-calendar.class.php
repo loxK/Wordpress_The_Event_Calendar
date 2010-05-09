@@ -910,7 +910,6 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 				$newRules[$base . '(\d{4}-\d{2})$']			= 'index.php?cat=' . $cat->cat_ID . '&eventDisplay=month' .'&eventDate=' . $wp_rewrite->preg_index(1);
 				$newRules[$base . '?$']						= 'index.php?cat=' . $cat->cat_ID . '&eventDisplay=' . eventsGetOptionValue('viewOption','month');
 			}
-			var_dump( $newRules);
 			$wp_rewrite->rules = $newRules + $wp_rewrite->rules;
 			
 		}
