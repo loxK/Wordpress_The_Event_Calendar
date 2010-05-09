@@ -22,8 +22,8 @@ if( !class_exists( 'Events_List_Widget' ) ) {
 			}
 		
 			function widget( $args, $instance ) {
-			
-			    if( !eventsGetOptionValue('categoryId') ) return;
+			    
+			    if( !eventsGetOptionValue('category_id') ) return;
 			
 				global $wp_query;
 				extract( $args );

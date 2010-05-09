@@ -730,7 +730,7 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 	     * @return int|false Category id to use or false is none is set
 	     */
 	    static function eventCategory() {
-			return The_Events_Calendar::eventCategoryId();
+			return self::eventCategoryId();
 	    }
 	    
 	    /**
@@ -740,7 +740,9 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 	     */
 	    static function eventCategoryId() {
 	    	
-	    	if( $categoryId = eventsGetOptionValue('category_id', null) ) return $categoryId && $category_id>0 ? $category_id : false;
+	    	$categoryId = (int)eventsGetOptionValue('category_id', null);
+
+	    	if( (int)$categoryId && $categoryId>0 ) return $categoryId;
 			return false;
 				
 	    }
