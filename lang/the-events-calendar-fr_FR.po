@@ -652,11 +652,11 @@ msgstr ""
 
 #: the-events-calendar.class.php:192
 msgid "Mayotte"
-msgstr ""
+msgstr "Mayotte"
 
 #: the-events-calendar.class.php:193
 msgid "Mexico"
-msgstr ""
+msgstr "Mexico"
 
 #: the-events-calendar.class.php:194
 msgid "Micronesia, Federated States Of"
@@ -668,11 +668,11 @@ msgstr ""
 
 #: the-events-calendar.class.php:196
 msgid "Monaco"
-msgstr ""
+msgstr "Monaco"
 
 #: the-events-calendar.class.php:197
 msgid "Mongolia"
-msgstr ""
+msgstr "Mongolie"
 
 #: the-events-calendar.class.php:198
 msgid "Montserrat"
@@ -696,7 +696,7 @@ msgstr ""
 
 #: the-events-calendar.class.php:203
 msgid "Nauru"
-msgstr ""
+msgstr "Nauru"
 
 #: the-events-calendar.class.php:204
 msgid "Nepal"
@@ -716,7 +716,7 @@ msgstr "Nouvelle-Calédonie"
 
 #: the-events-calendar.class.php:208
 msgid "New Zealand"
-msgstr ""
+msgstr "Nouvelle-Zélande"
 
 #: the-events-calendar.class.php:209
 msgid "Nicaragua"
@@ -1252,7 +1252,6 @@ msgid "End Date / Time:"
 msgstr "Date de fin / Heure :"
 
 #: views/events-meta-box.php:270
-#, fuzzy
 msgid "Event Location Details"
 msgstr "Détails de l'évènement"
 
@@ -1514,7 +1513,7 @@ msgstr "Laisser vide pour cacher ce champ. Entrer un 0 pour les évènements qui
 
 #: views/events-meta-box.php:398
 msgid "Sell Tickets &amp; Track Registration"
-msgstr ""
+msgstr "Vente de tickets et suivi"
 
 #: views/events-meta-box.php:403
 msgid "Interested in selling tickets and tracking registrations? Now you can do it for free using our <a href=\"http://wordpress.org/extend/plugins/eventbrite-for-the-events-calendar/\">Eventbrite Integration Plugin</a>. Eventbrite is a feature rich easy-to-use event management tool. \"Wow, you're selling Eventbrite pretty hard. You must get a kickback.\"  Well, now that you mention it... we do. We get a little something for everyone that registers an event using our referral link. It's how we're able to keep supporting and building plugins for the open source community. "
@@ -1525,7 +1524,6 @@ msgid "Check it out here."
 msgstr "Vérifiez cela ici."
 
 #: views/events-meta-box.php:421
-#, fuzzy
 msgid "<h4>If You Like This Plugin - Help Support It</h4><p>We spend a lot of time and effort building robust plugins and we love to share them with the community. If you use this plugin consider making a donation to help support its' continued development. You may remove this message on the <a href=\"/wp-admin/options-general.php?page=the-events-calendar.php\">settings page</a>.</p>"
 msgstr ""
 "<h4>Si vous aimez ce plugin - Aidez à le soutenir </h4>\r\n"
@@ -1569,9 +1567,8 @@ msgstr "Paramètres"
 
 #: views/events-options.php:127
 #: views/events-options.php:131
-#, fuzzy
 msgid "Blog category for the events"
-msgstr "Vue par défaut pour les évènements"
+msgstr "Catégorie des évènements"
 
 #: views/events-options.php:138
 #: views/events-options.php:160
@@ -1581,11 +1578,11 @@ msgstr "Sélection"
 #: views/events-options.php:149
 #: views/events-options.php:153
 msgid "Page place-holder"
-msgstr ""
+msgstr "Page réservée"
 
 #: views/events-options.php:166
 msgid "Select a page to hold the calendar. (optional)"
-msgstr ""
+msgstr "Choisissez une page qui affichera le calendrier des évènement (optionnel)"
 
 #: views/events-options.php:173
 #: views/events-options.php:177
@@ -1657,7 +1654,7 @@ msgstr "Ajouter le lieu à la requète Google Map"
 #: views/events-options.php:330
 #: views/events-options.php:334
 msgid "Feature on Event Date"
-msgstr ""
+msgstr "Événement du jour en vedette"
 
 #: views/events-options.php:348
 msgid "This option will bump an event to the top of the homepage loop on the day of the event."
@@ -1706,9 +1703,8 @@ msgstr "Fin :"
 
 #: views/list.php:60
 #: views/single.php:35
-#, fuzzy
 msgid "Google Map"
-msgstr "Afficher une carte Google "
+msgstr "Afficher une carte Google"
 
 #: views/list.php:91
 msgid "&laquo; Previous Events"
