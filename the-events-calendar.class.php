@@ -474,7 +474,10 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 			load_plugin_textdomain( $this->pluginDomain, false, basename(dirname(__FILE__)) . '/lang/');
 			$eventsURL = trailingslashit( WP_PLUGIN_URL ) . trailingslashit( plugin_basename( dirname( __FILE__ ) ) ) . 'resources/';
 			wp_enqueue_script('sp-events-calendar-script', $eventsURL.'events.js', array('jquery') );
-			wp_enqueue_style('sp-events-calendar-style', $eventsURL.'events.css');
+			if( file_exists(TEMPLATEPATH.'/events.css' ) ) {
+				wp_enqueue_style('sp-events-calendar-style',  get_bloginfo('template_directory').'/events.css');
+			}
+			else wp_enqueue_style('sp-events-calendar-style', $eventsURL.'events.css');
 		}
 	
 		/**
