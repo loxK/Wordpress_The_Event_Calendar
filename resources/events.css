@@ -3,46 +3,31 @@
 */
 
 .category-events #tec-content {
-	background:#fff;
-	
+	width: 600px;
+	margin: 0 auto;
 }
 #tec-events-calendar-header {
 	position:relative;
-	margin-bottom:18px;
+	margin-bottom:5px;
 }
 .tec-calendar-buttons {
-	position:absolute;
-	right:0;
-	top:6px;
 }
 h2.tec-cal-title {
-	float:left;
-	padding-right:15px;
 }
 .tec-calendar-buttons a {
-	background:#999;
-	border-radius:3px;
-	color:#fff;
+	
 	display:block;
-	float:left;
+	float:right;
 	font-size:11px;
 	font-weight:bold;
-	height:27px;
-	line-height:27px;
-	margin:21px 0 24px 10px;
+	margin: 15px 0 0 0;
 	padding: 0 4px;
 	text-align:center;
-	text-shadow:1px 1px 0 rgba(0,0,0,.5);
-	text-transform:uppercase;
 	width:auto;
-	-moz-border-radius:3px;
-	-webkit-border-radius:3px;
 }
 .upcoming a.tec-button-on, .grid a.tec-button-on {
-	background:#0F81BB;
 }
 .upcoming a.tec-button-off, .grid a.tec-button-off {
-	background:#999999;
 }
 #tec-nav-above {
 	margin:5px 0 0;
@@ -54,7 +39,7 @@ h2.tec-cal-title {
 select.tec-events-dropdown {
 	width:auto;
 	font-size:11px;
-	margin:33px 9px 0 0;
+	margin:15px 9px 0 0;
 }
 .category-events .post {
 	padding:0 0 12px 10px;
