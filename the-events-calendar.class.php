@@ -368,6 +368,7 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 					$options['embedGoogleMapsWidth'] = $_POST['embedGoogleMapsWidth'];
 				}
 				
+				$options['googleAddVenueToQuery'] = $_POST['googleAddVenueToQuery'];
 				$options['showComments'] = $_POST['showComments'];
 				$options['displayEventsOnHomepage'] = $_POST['displayEventsOnHomepage'];
 				$options['resetEventPostDate'] = $_POST['resetEventPostDate'];

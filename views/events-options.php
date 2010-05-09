@@ -299,7 +299,33 @@ try {
 	            </fieldset>
 	        </td>
 		</tr>
+        <tr>
+			<th scope="row"><?php _e('Add venue to google map query',$this->pluginDomain); ?></th>
+	        <td>
+	            <fieldset>
+	                <legend class="screen-reader-text">
+	                    <span><?php _e('Add venue to google map query',$this->pluginDomain); ?></span>
 
+	                </legend>
+	                <label title='Yes'>
+	                    <?php 
+	                    $googleAddVenueToQuery = eventsGetOptionValue('googleAddVenueToQuery','no'); 
+	                    if( $googleAddVenueToQuery == 'no' ) {
+	                        $noGoogleAddVenueToQuery = 'checked="checked"';
+	                    } else {
+	                        $yesGoogleAddVenueToQuery = 'checked="checked"';
+	                    }
+	                    ?>
+	                    <input type="radio" name="googleAddVenueToQuery" value="yes" <?php echo $yesGoogleAddVenueToQuery; ?> /> 
+	                    <?php _e('Yes',$this->pluginDomain); ?>
+	                </label><br />
+	                <label title='No'>
+	                    <input type="radio" name="googleAddVenueToQuery" value="no" <?php echo $noGoogleAddVenueToQuery; ?> /> 
+	                    <?php _e('No',$this->pluginDomain); ?>
+	                </label><br />
+	            </fieldset>
+	        </td>
+		</tr>
 			<tr>
 				<th scope="row"><?php _e('Feature on Event Date',$this->pluginDomain); ?></th>
 		        <td>

@@ -101,6 +101,7 @@ if( class_exists( 'The_Events_Calendar' ) && !function_exists( 'eventsGetOptionV
 		}
 		if ( !is_event( $postId ) ) return false;
 		$locationMetaSuffixes = array( 'Address', 'City', 'State', 'Province', 'Zip', 'Country' );
+		if(eventsGetOptionValue('googleAddVenueToQuery','no') === 'yes') $locationMetaSuffixes = array('Venue') + $locationMetaSuffixes;
 		$toUrlEncode = "";
 		foreach( $locationMetaSuffixes as $val ) {
 			$metaVal = get_post_meta( $postId, '_Event' . $val, true );
