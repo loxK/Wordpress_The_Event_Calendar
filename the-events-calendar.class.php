@@ -654,7 +654,7 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 		 * Removes event posts from the loop.  This uses a standard wordpress pre_get_posts
 		 */
 		public function events_cat_excluder( $query ) {
-		    if( (!is_home() &&  eventsGetOptionValue('hide_category','no')!=='no') ||
+		    if( (!is_admin() && !is_home() &&  eventsGetOptionValue('hide_category','no')!=='no') ||
 		          (is_home() && eventsGetOptionValue( 'displayEventsOnHomepage' ) == 'off') ) {		
 		        $excluded_home_cats = $this->event_category_ids();
 		        $cni = $query->get('category__not_in');
