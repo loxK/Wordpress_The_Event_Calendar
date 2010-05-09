@@ -316,6 +316,28 @@ try {
 		            </fieldset>
 		        </td>
 			</tr>
+			<tr>
+				<th scope="row"><?php _e('Layout',$this->pluginDomain); ?></th>
+		        <td>
+		            <fieldset>
+		                <legend class="screen-reader-text">
+		                    <span><?php _e('Layout',$this->pluginDomain); ?></span>
+		                </legend>
+		                <label title='Yes'>
+		                    <?php 
+		                    $layout = eventsGetOptionValue('layout','widecolumn'); 
+		                    ?>
+		                    <input type="radio" name="layout" value="narrowcolumn" <?php checked($layout, 'narrowcolumn'); ?>  /> 
+		                    <?php _e('Narrow Column',$this->pluginDomain); ?>
+		                </label> 
+		                <label title='List View'>
+	                    <input type="radio" name="layout" value="widecolumn" <?php checked($layout, 'widecolumn'); ?>  /> 
+		                    <?php _e('Wide column',$this->pluginDomain); ?>
+		                </label>
+		<br />
+		            </fieldset>
+		        </td>
+			</tr>
 	    <?php
 		try {
 			do_action( 'sp_events_options_bottom' );

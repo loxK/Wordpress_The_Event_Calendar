@@ -368,6 +368,7 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 				$options['displayEventsOnHomepage'] = $_POST['displayEventsOnHomepage'];
 				$options['resetEventPostDate'] = $_POST['resetEventPostDate'];
 				$options['useRewriteRules'] = $_POST['useRewriteRules'];
+				$options['layout'] = $_POST['layout'];
 				try {
 					do_action( 'sp-events-save-more-options' );
 					if ( !$this->optionsExceptionThrown ) $options['error'] = "";

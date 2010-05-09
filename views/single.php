@@ -3,7 +3,7 @@
 	$spEvents->loadDomainStylesScripts();
 	get_header();
 ?>	
-	<div id="tec-content" class="tec-event widecolumn">
+	<div id="tec-content" class="tec-event <?php echo eventsGetOptionValue('layout','widecolumn'); ?>">
 	<?php the_post(); global $post; ?>
 			<div id="post-<?php the_ID() ?>" <?php post_class() ?>>
 				<span class="back"><a href="<?php echo events_get_events_link(); ?>"><?php _e('&laquo; Back to Events', $spEvents->pluginDomain); ?></a></span>
