@@ -107,7 +107,7 @@ if( class_exists( 'The_Events_Calendar' ) && !function_exists( 'eventsGetOptionV
 			$metaVal = get_post_meta( $postId, '_Event' . $val, true );
 			if( $metaVal ) $toUrlEncode .= $metaVal . " ";
 		}
-		if( $toUrlEncode ) return "http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=" . urlencode( trim( $toUrlEncode ) );
+		if( $toUrlEncode ) return "http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=".substr(get_locale(), 0, strpos( get_locale(), '_')) ."&amp;geocode=&amp;q=" . urlencode( trim( $toUrlEncode ) );
 		return "";
 	}
 	/**
