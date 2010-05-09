@@ -3,7 +3,6 @@ jQuery(document).ready(function() {
 
 	function theEventsCalendarHideDonateButton() {
 		jQuery('#mainDonateRow').hide();
-		jQuery('#secondDonateRow').show();
 	} 
 	jQuery('#hideDonateButton').click(function() {
 		jQuery.post( '<?php bloginfo('wpurl'); ?>/wp-admin/admin-ajax.php', { donateHidden: true, action: 'hideDonate' }, theEventsCalendarHideDonateButton, 'json' );
@@ -22,7 +21,6 @@ jQuery(document).ready(function() {
 	#mainDonateRow {display: none;}
 <?php else : ?>
 	#mainDonateRow {background-color: #FCECA9;}
-	#secondDonateRow {display: none;}
 <?php endif; ?>
 #mainDonateRow label {}
 #submitLabel {display: block;}
@@ -113,17 +111,7 @@ try {
 	            </form>
 	        </td>
 	    </tr>
-	    <tr id="secondDonateRow">
-	        <td>
-	            <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-	                <input type="hidden" name="cmd" value="_s-xclick">
-	                <input type="hidden" name="hosted_button_id" value="10751527">
-	                <input type="hidden" name="item_name" value="Events Options Panel Secondary">
-	                <input id="secondSubmit" type="submit" value="<?php _e('Donate for this wonderful plugin', $this->pluginDomain); ?>" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-	                <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-	            </form>
-	        </td>
-	    </tr>
+	  
 	</table>
 
 	<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
