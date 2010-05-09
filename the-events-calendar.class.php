@@ -5,7 +5,6 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 	 */
 	class The_Events_Calendar {
 		const EVENTSERROROPT		= '_tec_events_errors';
-		const CATEGORYNAME	 		= 'Events';
 		const OPTIONNAME 			= 'sp_events_calendar_options';
 		// default formats, they are overridden by WP options or by arguments to date methods
 		const DATEONLYFORMAT 		= 'F j, Y';
@@ -659,7 +658,7 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 		 * @return bool true if is_category() is on a child of the events category
 		 */
 		public function in_event_category( ) {
-			if( is_category( The_Events_Calendar::CATEGORYNAME ) ) {
+			if( is_category( The_Events_Calendar::eventCategoryName() ) ) {
 				return true;
 			}
 			$cat_id = get_query_var( 'cat' );
@@ -725,10 +724,56 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 		}
 		/**
 	     * Gets the Category id to use for an Event
+	     * @deprecated
 	     * @return int|false Category id to use or false is none is set
 	     */
 	    static function eventCategory() {
-			return get_cat_id( The_Events_Calendar::CATEGORYNAME );
+			return The_Events_Calendar::eventCategoryId();
+	    }
+	    
+	    /**
+	     * Gets the Category id to use for an Event
+	     * @deprecated
+	     * @return int|false Category id to use or false is none is set
+	     */
+	    static function eventCategoryId() {
+	    	
+	    	if($categoryId = eventsGetOptionValue('category_id') ) return $categoryId;
+			
+			return false;
+				
+	    }
+	    
+	    /**
+	     * Gets the Category name to use for an Event
+	     * @return string|false Category name to use or false if none is set
+	     */
+	    static function eventCategoryName() {
+	    	
+	    	if( $categoryId = The_Events_Calendar::eventCategoryId() ) {
+	    		
+	    		return get_category($categoryId)->name;
+	    		
+	    	}
+			
+			return false;
+				
+	    }
+	    
+	    /**
+	     * Gets the Category to use for an Event as an object
+	     * @return object|false Category to use or false if none is set
+	     */
+	    static function eventCategoryObj() {
+	    	
+	        if( $categoryId = The_Events_Calendar::eventCategoryId() ) {
+	    		
+	    		return get_category($categoryId);
+	    		
+	    	}
+			
+			return false;
+				
 	    }
 		/**
 		 * Flush rewrite rules to support custom links
@@ -763,10 +808,19 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 		 * @return void
 		 */
 		public function filterRewriteRules( $wp_rewrite ) {
+		
 			if( $useRewriteRules = eventsGetOptionValue('useRewriteRules','on') == 'off' ) {
 				return;
 			}
-			$categoryId = get_cat_id( The_Events_Calendar::CATEGORYNAME );
+			
+			// as this filter runs befor options are saved we need to get the new category_id if any
+			if (isset($_POST['saveEventsCalendarOptions']) && check_admin_referer('saveEventsCalendarOptions')) {
+			    $categoryId = (int)$_POST['category_id'];
+			} else  $categoryId = $this->eventCategoryId();
+			
+			// if the events category isn't set, we do not neeed to add rewrite rules
+			if( !$categoryId ) return;			
+			
 			$eventCategory = get_category( $categoryId );
 			$eventCats = array( $eventCategory );
 			$childCats = get_categories("hide_empty=0&child_of=$categoryId");
@@ -783,15 +837,15 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 				$newRules[$base . '(\d{4}-\d{2})$']			= 'index.php?cat=' . $cat->cat_ID . '&eventDisplay=month' .'&eventDate=' . $wp_rewrite->preg_index(1);
 				$newRules[$base . '?$']						= 'index.php?cat=' . $cat->cat_ID . '&eventDisplay=' . eventsGetOptionValue('viewOption','month');
 			}
-		  $wp_rewrite->rules = $newRules + $wp_rewrite->rules;
+		    $wp_rewrite->rules = $newRules + $wp_rewrite->rules;
 		}
 		/**
 		 * Creates the events category and updates the  core options (if not already done)
 		 * @return int cat_ID
 		 */
 		public function create_category_if_not_exists( ) {
-			if ( !category_exists( The_Events_Calendar::CATEGORYNAME ) ) {
-				$category_id = wp_create_category( The_Events_Calendar::CATEGORYNAME );
+			if ( !category_exists( The_Events_Calendar::eventCategoryName() ) ) {
+				$category_id = wp_create_category( The_Events_Calendar::eventCategoryName() );
 				return $category_id;
 			} else {
 				return $this->eventCategory();
@@ -1253,7 +1307,7 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 		public function iCalFeed( $postId = null ) {
 		    $getstring = $_GET['ical'];
 			$wpTimezoneString = get_option("timezone_string");
-			$categoryId = get_cat_id( The_Events_Calendar::CATEGORYNAME );
+			$categoryId = get_cat_id( The_Events_Calendar::eventCategoryName() );
 			$events = "";
 			$lastBuildDate = "";
 			$eventsTestArray = array();

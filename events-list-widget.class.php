@@ -60,8 +60,7 @@ if( !class_exists( 'Events_List_Widget' ) ) {
 					if( function_exists( 'get_events' ) ) {
 						$old_display = $wp_query->get('eventDisplay');
 						$wp_query->set('eventDisplay', 'upcoming');
-						$posts = get_events($limit, The_Events_Calendar::CATEGORYNAME);
-						//print_r($posts);
+						$posts = get_events($limit, The_Events_Calendar::eventCategoryName() );
 						
 						if ($posts) : 
 						
