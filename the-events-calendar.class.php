@@ -873,7 +873,7 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 			
 			$eventCats = array_merge( $eventCats, $childCats );
 			
-			$baseCategoryUrl = $this->get_category_link( $categoryId );
+			$baseCategoryUrl = get_category_link( $categoryId );
 			
 			foreach( $eventCats as $cat ) {
 			    

@@ -1704,7 +1704,7 @@ msgstr "Fin :"
 #: views/list.php:60
 #: views/single.php:35
 msgid "Google Map"
-msgstr "Afficher une carte Google"
+msgstr "Google Map"
 
 #: views/list.php:91
 msgid "&laquo; Previous Events"
