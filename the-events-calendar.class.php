@@ -326,15 +326,18 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 			add_action( 'admin_menu', 		array( $this, 'addEventBox' ) );
 			add_action( 'save_post',		array( $this, 'addEventMeta' ), 15 );
 			add_action( 'publish_post',		array( $this, 'addEventMeta' ), 15 );
-			add_filter( 'generate_rewrite_rules', array( $this, 'filterRewriteRules' ) );
-			add_filter( 'query_vars',		array( $this, 'eventQueryVars' ) );			
-			add_filter( 'posts_join',		array( $this, 'events_search_join' ) );
-			add_filter( 'posts_where',		array( $this, 'events_search_where' ) );
-			add_filter( 'posts_orderby',	array( $this, 'events_search_orderby' ) );
-			add_filter( 'posts_fields',		array( $this, 'events_search_fields' ) );
-			add_filter( 'post_limits',		array( $this, 'events_search_limits' ) );
-			add_action( 'template_redirect',		array($this, 'templateChooser' ) );
-			add_action( 'pre_get_posts',		array( $this, 'events_home_cat_excluder' ) );
+			
+			if( (int)$this->getSingleOption( 'category_id') > 0 ) {
+			    add_filter( 'generate_rewrite_rules', array( $this, 'filterRewriteRules' ) );
+			    add_filter( 'query_vars',		array( $this, 'eventQueryVars' ) );			
+			    add_filter( 'posts_join',		array( $this, 'events_search_join' ) );
+			    add_filter( 'posts_where',		array( $this, 'events_search_where' ) );
+			    add_filter( 'posts_orderby',	array( $this, 'events_search_orderby' ) );
+			    add_filter( 'posts_fields',		array( $this, 'events_search_fields' ) );
+			    add_filter( 'post_limits',		array( $this, 'events_search_limits' ) );
+			    add_action( 'template_redirect',		array($this, 'templateChooser' ) );
+			    add_action( 'pre_get_posts',		array( $this, 'events_home_cat_excluder' ) );
+			}
 			add_action( 'sp_events_post_errors', array( 'TEC_Post_Exception', 'displayMessage' ) );
 			add_action( 'sp_events_options_top', array( 'TEC_WP_Options_Exception', 'displayMessage') );
 		}
@@ -737,8 +740,7 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 	     */
 	    static function eventCategoryId() {
 	    	
-	    	if($categoryId = eventsGetOptionValue('category_id') ) return $categoryId;
-			
+	    	if( $categoryId = eventsGetOptionValue('category_id', null) ) return $categoryId && $category_id>0 ? $category_id : false;
 			return false;
 				
 	    }
@@ -818,7 +820,7 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 			} else  $categoryId = $this->eventCategoryId();
 			
 			// if the events category isn't set, we do not neeed to add rewrite rules
-			if( !$categoryId ) return;			
+			if( !$categoryId || $categoryId === -1) return;			
 			
 			$eventCategory = get_category( $categoryId );
 			$eventCats = array( $eventCategory );
