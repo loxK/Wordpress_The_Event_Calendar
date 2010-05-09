@@ -548,7 +548,7 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 		}
 		
 		/**
-		 * Creates the category and sets up the theme resource folder with sample config files.
+		 * Sets up the theme resource folder with sample config files.
 		 * 
 		 * @return void
 		 */
@@ -556,7 +556,6 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 			$now = time();
 			$firstTime = $now - ($now % 66400);
 			wp_schedule_event( $firstTime, 'daily', 'reschedule_event_post'); // schedule this for midnight, daily
-			$this->create_category_if_not_exists( );	
 			$this->flushRewriteRules();
 		}
 		/**
@@ -839,19 +838,7 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 			}
 		    $wp_rewrite->rules = $newRules + $wp_rewrite->rules;
 		}
-		/**
-		 * Creates the events category and updates the  core options (if not already done)
-		 * @return int cat_ID
-		 */
-		public function create_category_if_not_exists( ) {
-			if ( !category_exists( The_Events_Calendar::eventCategoryName() ) ) {
-				$category_id = wp_create_category( The_Events_Calendar::eventCategoryName() );
-				return $category_id;
-			} else {
-				return $this->eventCategory();
-			}
-		}
-
+		
 		/**
 		 * This plugin does not have any deactivation functionality. Any events, categories, options and metadata are
 		 * left behind.
@@ -880,7 +867,7 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 		 */
 		public function addEventMeta( $postId ) {
 			if ($_POST['isEvent'] == 'yes') {
-				$category_id = $this->create_category_if_not_exists();
+				$category_id = $this->eventCategoryId();
 				// add a function below to remove all existing categories - wp_set_post_categories(int ,  array )
 				if( $_POST['EventAllDay'] == 'yes' ) {
 					$_POST['EventStartDate'] = $this->dateToTimeStamp( $_POST['EventStartYear'], $_POST['EventStartMonth'], $_POST['EventStartDay'], "12", "00", "AM" );
