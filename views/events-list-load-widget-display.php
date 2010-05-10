@@ -12,6 +12,11 @@ $EventState		= get_post_meta( $post->ID, '_EventState', true );
 $EventProvince	= get_post_meta( $post->ID, '_EventProvince', true );
 ?>
 
+<?php
+    /* Display link to all events */
+    echo '<div class="dig-in"><a href="' . $event_url . '">' . __('View All Events', $this->pluginDomain ) . '</a></div>';
+?>
+
 <li class="<?php echo $alt_text ?>">
 	<div class="when">
 		<span class="month"><?php echo date_i18n('M', $start_time); ?></span>
