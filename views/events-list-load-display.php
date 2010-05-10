@@ -3,7 +3,7 @@
 		<span class="month"><?php echo date_i18n('M', $start_time); ?></span>
 		<span class="date"><?php echo date_i18n('j', $start_time); ?></span>
 	</div>
-	<div class="event"><a href="<?php the_permalink(); ?>" ><?php echo $post->post_title ?></a> <?php if($EventPage!='') echo ' - <em>' . $EventPage->post_title .'</em>' ?></div>
+	<div class="event"><a href="<?php echo get_permalink($post->ID) ?>" ><?php echo $post->post_title ?></a> <?php if($EventPage!='') echo ' - <em>' . $EventPage->post_title .'</em>' ?></div>
 	<div class="loc"><?php
 		$space = false;
 		$output = '';
