@@ -33,6 +33,7 @@ if( !class_exists( 'Events_List_Widget' ) ) {
 				$limit = $instance['limit'];
 				$start = $instance['start'];
 				$end = $instance['end'];
+				$page = $instance['page'];
 				$venue = $instance['venue'];
 				$address = $instance['address'];
 				$city = $instance['city'];
@@ -94,6 +95,7 @@ if( !class_exists( 'Events_List_Widget' ) ) {
 					$instance['limit'] = strip_tags( $new_instance['limit'] );
 					$instance['start'] = strip_tags( $new_instance['start'] );
 					$instance['end'] = strip_tags( $new_instance['end'] );
+					$instance['page'] = strip_tags( $new_instance['page'] );
 					$instance['venue'] = strip_tags( $new_instance['venue'] );
 					$instance['country'] = strip_tags( $new_instance['country'] );
 					$instance['address'] = strip_tags( $new_instance['address'] );

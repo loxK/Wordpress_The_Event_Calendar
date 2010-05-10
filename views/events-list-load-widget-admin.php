@@ -18,6 +18,7 @@
 <?php $displayoptions = array (
 	"start" => __('Start Date & Time', $this->pluginDomain),
 	"end" => __("End Date & Time", $this->pluginDomain),
+	"page" => __("Page", $this->pluginDomain),
 	"venue" => __("Venue", $this->pluginDomain),
 	"address" => __("Address", $this->pluginDomain),
 	"city" => __("City", $this->pluginDomain),

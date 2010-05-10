@@ -28,11 +28,13 @@ $EventProvince	= get_post_meta( $post->ID, '_EventProvince', true );
 	<div class="loc"><?php
 		$space = false;
 		$output = '';
+		
 		if ($page == true && $EventPage != '') {
 			$space = true;
-			$_page &= get_post($EventPage);
-			if($_page) {
-			    $output .= $_page->post_name . ', ';
+			$_page = get_page($EventPage);
+			
+;			if($_page) {
+			    $output .= '<a href="'. get_permalink($EventPage).'">' . $_page->post_title . '</a>, ';
 			}
 		}
 		if ($venue == true && $EventVenue != '') {
