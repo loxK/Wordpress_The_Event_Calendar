@@ -1208,7 +1208,7 @@ msgstr "En savoir plus"
 
 #: views/events-meta-box.php:106
 msgid "is not valid."
-msgstr "n'est pas valide."
+msgstr "n est pas valide."
 
 #: views/events-meta-box.php:106
 msgid "Valid values are local format (eg. 02 1234 5678 or 123 123 4567) or international format (eg. +61 (0) 2 1234 5678 or +1 123 123 4567).  You may also use an optional extension of up to five digits prefixed by x or ext (eg. 123 123 4567 x89)"
