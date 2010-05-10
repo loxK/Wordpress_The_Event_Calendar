@@ -27,6 +27,7 @@ if ( !class_exists( 'The_Events_Calendar' ) ) {
 					'_EventAllDay',
 					'_EventStartDate',
 					'_EventEndDate',
+					'_EventPage',
 					'_EventVenue',
 					'_EventCountry',
 					'_EventAddress',

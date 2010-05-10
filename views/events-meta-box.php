@@ -270,6 +270,20 @@ try {
 			<td colspan="2" class="snp_sectionheader"><h4><?php _e('Event Location Details', $this->pluginDomain); ?></h4></td>
 		</tr>
 		<tr>
+			<td><?php _e('Event page:',$this->pluginDomain); ?></td>
+			<td>
+				<?php
+				        
+				        	$viewOptionValue = $_EventPage;
+				        	
+				          	$dropdown_options = array('show_option_none' => __('Select'), 'hide_empty' => 0, 'hierarchical' => 1,
+													  'show_count' => 0, 'orderby' => 'name', 'selected' => (int)$viewOptionValue, 
+													  'name'=>'EventPage');
+							wp_dropdown_pages($dropdown_options);
+				        ?>
+			</td>
+		</tr>
+		<tr>
 			<td><?php _e('Venue:',$this->pluginDomain); ?></td>
 			<td>
 				<input tabindex="<?php $this->tabIndex(); ?>" type='text' name='EventVenue' size='25'  value='<?php echo $_EventVenue; ?>' />
