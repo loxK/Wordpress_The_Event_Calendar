@@ -57,6 +57,9 @@ if( !class_exists( 'Events_List_Widget' ) ) {
 				if ( $title )
 					echo $before_title . $title . $after_title;
 				
+				/* Display link to all events */
+                echo '<div class="dig-in"><a href="' . $event_url . '">' . __('View All Events', $this->pluginDomain ) . '</a></div>';
+
 				/* Display list of events. */
 					if( function_exists( 'get_events' ) ) {
 						$old_display = $wp_query->get('eventDisplay');
@@ -64,7 +67,7 @@ if( !class_exists( 'Events_List_Widget' ) ) {
 						$posts = get_events($limit, The_Events_Calendar::eventCategoryName() );
 						
 						if ($posts) : 
-						
+						    
 							echo "<ul class='upcoming'>";
 							foreach( $posts as $post ) : 
 								setup_postdata($post);

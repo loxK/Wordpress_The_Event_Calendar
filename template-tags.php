@@ -489,14 +489,17 @@ if( class_exists( 'The_Events_Calendar' ) && !function_exists( 'eventsGetOptionV
 	 * @return array results
 	 */
 	function get_events( $numResults = null, $catName = null ) {
+	
 		if( !$numResults ) $numResults = get_option( 'posts_per_page', 10 );
 		global $wpdb, $spEvents;
 		$spEvents->setOptions();
+		
 		if( $catName ) {
 			$categoryId = get_cat_id( $catName );		
 		} else {
 			$categoryId = get_query_var( 'cat' );
 		}		
+		
 		$extraSelectClause ='';
 		$extraJoinEndDate ='';
 		if ( events_displaying_month() ) {
@@ -775,4 +778,70 @@ if( class_exists( 'The_Events_Calendar' ) && !function_exists( 'eventsGetOptionV
 		}
 		return get_post_meta( $postId, '_EventAllDay', true );
 	}
+	
+	function the_event_get_upcoming ($args=array()) {
+			    
+	    if( !eventsGetOptionValue('category_id') ) return;
+			
+		    global $wp_query;
+			$args = wp_parse_args( $args );
+				
+			extract($args);
+
+			if ( eventsGetOptionValue('viewOption') == 'upcoming') {
+				$event_url = events_get_listview_link();
+			} else {
+				$event_url = events_get_gridview_link();
+			}
+
+			/* Display list of events. */
+			if( function_exists( 'get_events' ) ) {
+				$old_display = $wp_query->get('eventDisplay');
+				$wp_query->set('eventDisplay', 'upcoming');
+				
+				$posts = get_events(isset($limit) ? $limit : null, isset($category_name) ? $category_name : The_Events_Calendar::eventCategoryName() );
+						
+				if ($posts) { 
+						
+					echo "<ul class='upcoming'>";
+
+					foreach( $posts as $post ) { 
+
+						setup_postdata($post);
+								
+                        // let's make time
+                        $start_time		= strtotime(get_post_meta( $post->ID, '_EventStartDate', true )); 
+
+                        $EventPage		= get_post_meta( $post->ID, '_EventPage', true );
+                        $EventPage      = $EventPage !== '' ? get_page($EventPage) : '';
+                            
+                        $EventCity		= get_post_meta( $post->ID, '_EventCity', true );
+                        $EventVenue		= get_post_meta( $post->ID, '_EventVenue', true );
+                        $EventCountry	= get_post_meta( $post->ID, '_EventCountry', true );
+                        $EventState		= get_post_meta( $post->ID, '_EventState', true );
+                        $EventProvince	= get_post_meta( $post->ID, '_EventProvince', true );
+                            
+                        if (isset($template) && file_exists(TEMPLATEPATH.'/events/'.$template) ) {
+                            include (TEMPLATEPATH.'/events/'.$template);
+                        }
+                        if (file_exists(TEMPLATEPATH.'/events/events-list-load-display.php') ) {
+							include (TEMPLATEPATH.'/events/events-list-load-display.php');
+						} 
+						else {
+							include( dirname( __FILE__ ) . '/views/events-list-load-display.php' );						
+						}
+					}
+						
+					echo "</ul>";
+						
+				}
+				else {
+					echo "no events";
+			    }
+                       
+				$wp_query->set('eventDisplay', $old_display);
+			}
+
+    }
+	
 } // end if class_exists('The-Events-Calendar')

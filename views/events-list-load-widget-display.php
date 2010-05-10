@@ -14,11 +14,6 @@ $EventState		= get_post_meta( $post->ID, '_EventState', true );
 $EventProvince	= get_post_meta( $post->ID, '_EventProvince', true );
 ?>
 
-<?php
-    /* Display link to all events */
-    echo '<div class="dig-in"><a href="' . $event_url . '">' . __('View All Events', $this->pluginDomain ) . '</a></div>';
-?>
-
 <li class="<?php echo $alt_text ?>">
 	<div class="when">
 		<span class="month"><?php echo date_i18n('M', $start_time); ?></span>
@@ -33,7 +28,7 @@ $EventProvince	= get_post_meta( $post->ID, '_EventProvince', true );
 			$space = true;
 			$_page = get_page($EventPage);
 			
-;			if($_page) {
+			if($_page) {
 			    $output .= '<a href="'. get_permalink($EventPage).'">' . $_page->post_title . '</a>, ';
 			}
 		}
@@ -68,3 +63,4 @@ $EventProvince	= get_post_meta( $post->ID, '_EventProvince', true );
 	<a class="more-link" href="<?php echo get_permalink($post->ID) ?>"><?php _e('More Info', $this->pluginDomain); ?></a>
 </li>
 <?php $alt_text = ( empty( $alt_text ) ) ? 'alt' : '';
+
