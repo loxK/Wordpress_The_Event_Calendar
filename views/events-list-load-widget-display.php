@@ -5,7 +5,9 @@
  * @return string
  */
 // let's make time
-$start_time		= strtotime(get_post_meta( $post->ID, '_EventStartDate', true )); 
+$start_time		= strtotime(get_post_meta( $post->ID, '_EventStartDate', true ));
+$EventPage		= get_post_meta( $post->ID, '_EventPage', true );
+$EventVenue		= get_post_meta( $post->ID, '_EventVenue', true );
 $EventCity		= get_post_meta( $post->ID, '_EventCity', true );
 $EventCountry	= get_post_meta( $post->ID, '_EventCountry', true );
 $EventState		= get_post_meta( $post->ID, '_EventState', true );
@@ -26,9 +28,20 @@ $EventProvince	= get_post_meta( $post->ID, '_EventProvince', true );
 	<div class="loc"><?php
 		$space = false;
 		$output = '';
+		if ($page == true && $EventPage != '') {
+			$space = true;
+			$_page &= get_post($EventPage);
+			if($_page) {
+			    $output .= $_page->post_name . ', ';
+			}
+		}
+		if ($venue == true && $EventVenue != '') {
+			$space = true;
+			$output .= $EventVenue . ', ';
+		}
 		if ($city == true && $EventCity != '') {
 			$space = true;
-			$output = $EventCity . ', ';
+			$output .= $EventCity . ', ';
 		}
 		if ($state == true || $province == true){
 			if ( $EventCountry == "United States" &&  $EventState != '') {
